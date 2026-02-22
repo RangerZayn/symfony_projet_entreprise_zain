@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Modifier Produit{% endblock %}
+
+{% block page_title %}Modifier Produit{% endblock %}
+
+{% block page_content %}
+    <div class="container mx-auto px-4 py-8">
+        <h1 class="text-3xl font-bold mb-2 text-center">Modifier le produit</h1>
+        <p class="text-center text-gray-600 text-sm mb-8">Mettez à jour les informations du produit</p>
+
+        <div class="max-w-md mx-auto bg-white rounded-lg shadow px-6 py-8">
+            {{ form_start(form, {'attr': {'class': 'space-y-4'}}) }}
+                {% for field in form %}
+                    {% if field.vars.block_prefixes[0] != 'hidden' %}
+                        {{ form_row(field) }}
+                    {% endif %}
+                {% endfor %}
+                
+                <div class="flex space-x-3 pt-4">
+                    <a href="{{ path('product_index') }}" class="flex-1 bg-gray-900 hover:bg-gray-800 text-white font-bold py-2 px-4 rounded text-center transition duration-200">
+                        Annuler
+                    </a>
+                    <button type="submit" class="flex-1 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded transition duration-200">
+                        Enregistrer
+                    </button>
+                </div>
+            {{ form_end(form) }}
+        </div>
+    </div>
+{% endblock %}

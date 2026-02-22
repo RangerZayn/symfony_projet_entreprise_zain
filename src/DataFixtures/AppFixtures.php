@@ -49,12 +49,76 @@ class AppFixtures extends Fixture
         $user->setPassword($hashedPassword);
         $manager->persist($user);
 
-        // Create some products
-        for ($i = 0; $i < 10; $i++) {
+        // Create pet store products
+        $petProducts = [
+            [
+                'name' => 'Croquettes Premium Chat Adulte',
+                'description' => 'Croquettes haut de gamme pour chat adulte avec viande de poisson. Formule complète et équilibrée avec vitamines et minéraux. Sac de 2kg.',
+                'price' => 24.99,
+                'type' => 'physical',
+            ],
+            [
+                'name' => 'Panier Confortable pour Chien',
+                'description' => 'Panier rembourré en mousse haute densité pour petit et moyen chien. Dimensions: 80x60cm. Lavable en machine.',
+                'price' => 45.50,
+                'type' => 'physical',
+            ],
+            [
+                'name' => 'Aquarium LED 120L',
+                'description' => 'Aquarium complet avec filtration, chauffage et éclairage LED 24h. Capacité: 120 litres. Parfait pour poissons tropicaux.',
+                'price' => 189.99,
+                'type' => 'physical',
+            ],
+            [
+                'name' => 'Collier GPS pour Chat/Chien',
+                'description' => 'Collier de suivi GPS waterproof avec batterie 5 jours. Application mobile pour localisation en temps réel. Compatible tous colliers.',
+                'price' => 2500.00,
+                'type' => 'physical',
+            ],
+            [
+                'name' => 'Jouets Interactifs pour Lapin',
+                'description' => 'Lot de 5 jouets en bois naturel et matière tissée pour stimuler l\'activité du lapin. Sécurisé et 100% naturel.',
+                'price' => 19.99,
+                'type' => 'physical',
+            ],
+            [
+                'name' => 'Guide Complet du Soigneur Animalier',
+                'description' => 'Ouvrage de référence sur le soin des animaux domestiques. PDF téléchargeable + accès vidéos exclusives. Format numérique.',
+                'price' => 12.99,
+                'type' => 'digital',
+            ],
+            [
+                'name' => 'Licence Formation Eleveur Certifié',
+                'description' => 'Certification numérique pour éleveurs animaliers. Cours complets, documents, certificat reconnu. Accès illimité.',
+                'price' => 299.00,
+                'type' => 'digital',
+            ],
+            [
+                'name' => 'Brosse de Toilettage Premium Chien',
+                'description' => 'Brosse double face avec picots en acier inoxydable. Ergonomique et confortable. Idéale pour tous types de pelage.',
+                'price' => 34.99,
+                'type' => 'physical',
+            ],
+            [
+                'name' => 'Cage Oiseaux Spacieuse',
+                'description' => 'Grande cage pour oiseaux avec deux portes, perchoirs et mangeoires. Dimensions: 92x60x58cm. Acier robuste.',
+                'price' => 89.50,
+                'type' => 'physical',
+            ],
+            [
+                'name' => 'Logiciel Gestion Clinique Vétérinaire',
+                'description' => 'Logiciel professionnel de gestion des animaux patients. Dossiers numériques, facturation, rappels rendez-vous. Licence annuelle.',
+                'price' => 1500.00,
+                'type' => 'digital',
+            ],
+        ];
+
+        foreach ($petProducts as $productData) {
             $product = new Product();
-            $product->setName('Pet Product ' . $i);
-            $product->setDescription('This is a great product for your pet!');
-            $product->setPrice(mt_rand(10, 100));
+            $product->setName($productData['name']);
+            $product->setDescription($productData['description']);
+            $product->setPrice($productData['price']);
+            $product->setProductType($productData['type']);
             $manager->persist($product);
         }
 

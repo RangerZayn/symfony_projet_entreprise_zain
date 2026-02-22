@@ -1,0 +1,67 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Gestion des Produits{% endblock %}
+
+{% block page_title %}Gestion des Produits{% endblock %}
+
+{% block page_content %}
+    <div class="container mx-auto px-4 py-8">
+        <div class="flex justify-between items-center mb-6">
+            <h1 class="text-3xl font-bold">Gestion des Produits</h1>
+            {% if is_granted('ROLE_ADMIN') %}
+                <a href="{{ path('product_new') }}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                    Ajouter un Produit
+                </a>
+            {% endif %}
+        </div>
+
+        {% if products %}
+            <div class="overflow-x-auto">
+                <table class="min-w-full bg-white border border-gray-300 rounded-lg shadow">
+                    <thead class="bg-gray-100 border-b-2 border-gray-300">
+                        <tr>
+                            <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700">Nom</th>
+                            <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700">Description</th>
+                            <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700">Prix</th>
+                            <th class="px-6 py-3 text-center text-sm font-semibold text-gray-700">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for product in products %}
+                            <tr class="border-b border-gray-300 hover:bg-gray-50">
+                                <td class="px-6 py-4 text-sm text-gray-700">{{ product.name }}</td>
+                                <td class="px-6 py-4 text-sm text-gray-700">{{ product.description }}</td>
+                                <td class="px-6 py-4 text-sm text-gray-700">{{ product.price }}€</td>
+                                <td class="px-6 py-4 text-center text-sm space-x-2">
+                                    {% if is_granted('PRODUCT_EDIT', product) %}
+                                        <a href="{{ path('product_edit', {id: product.id}) }}" class="inline-block bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-1 px-3 rounded text-xs">
+                                            Modifier
+                                        </a>
+                                    {% endif %}
+                                    {% if is_granted('PRODUCT_DELETE', product) %}
+                                        <form method="POST" action="{{ path('product_delete', {id: product.id}) }}" style="display:inline;" onsubmit="return confirm('Vous êtes sûr de vouloir supprimer?');">
+                                            <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ product.id) }}">
+                                            <button type="submit" class="bg-red-500 hover:bg-red-700 text-white font-bold py-1 px-3 rounded text-xs">
+                                                Supprimer
+                                            </button>
+                                        </form>
+                                    {% endif %}
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="mt-6">
+                <a href="{{ path('product_export_csv') }}" class="bg-gray-900 hover:bg-gray-800 text-white font-bold py-2 px-4 rounded">
+                    Exporter CSV
+                </a>
+            </div>
+        {% else %}
+            <div class="bg-gray-100 border border-gray-300 rounded px-4 py-3 text-gray-700">
+                Aucun produit trouvé.
+            </div>
+        {% endif %}
+    </div>
+{% endblock %}

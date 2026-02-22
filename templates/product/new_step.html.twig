@@ -1,0 +1,92 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Ajouter un Produit{% endblock %}
+
+{% block page_title %}Ajouter un Produit{% endblock %}
+
+{% block page_content %}
+    <div class="container mx-auto px-4 py-8">
+        <h1 class="text-3xl font-bold mb-2 text-center">{{ title }}</h1>
+        
+        <!-- Progress Indicator -->
+        <div class="mb-8 flex justify-center">
+            <div class="flex items-center justify-center space-x-2">
+                {% for s in steps %}
+                    {% set isCompleted = step > s %}
+                    {% set isCurrent = step == s %}
+                    
+                    {% if s == 99 %}
+                        {% if isCurrent %}
+                            <span class="bg-gray-900 text-white w-10 h-10 flex items-center justify-center rounded-full font-bold text-lg">✓</span>
+                        {% elseif isCompleted %}
+                            <span class="bg-green-500 text-white w-10 h-10 flex items-center justify-center rounded-full font-bold text-lg">✓</span>
+                        {% else %}
+                            <span class="bg-white border-2 border-gray-300 text-black w-10 h-10 flex items-center justify-center rounded-full font-bold text-lg">✓</span>
+                        {% endif %}
+                    {% else %}
+                        {% if isCurrent %}
+                            <span class="bg-gray-900 text-white w-10 h-10 flex items-center justify-center rounded-full font-bold text-lg">{{ s }}</span>
+                        {% elseif isCompleted %}
+                            <span class="bg-green-500 text-white w-10 h-10 flex items-center justify-center rounded-full font-bold text-lg">{{ s }}</span>
+                        {% else %}
+                            <span class="bg-white border-2 border-gray-300 text-black w-10 h-10 flex items-center justify-center rounded-full font-bold text-lg">{{ s }}</span>
+                        {% endif %}
+                    {% endif %}
+                    {% if not loop.last %}<span class="text-gray-400 mx-1">—</span>{% endif %}
+                {% endfor %}
+            </div>
+        </div>
+
+        <div class="max-w-md mx-auto bg-white rounded-lg shadow px-6 py-8">
+            {{ form_start(form, {'attr': {'class': 'space-y-4'}}) }}
+                
+                {% for field in form %}
+                    {% if field.vars.block_prefixes[0] != 'hidden' %}
+                        {% if field.vars.name == 'product_type' %}
+                            <div class="mb-4">
+                                {{ form_label(field) }}
+                                <div class="mt-2">
+                                    {% for choice in field %}
+                                        <div class="mb-4">
+                                            {{ form_widget(choice) }}
+                                            {{ form_label(choice) }}
+                                        </div>
+                                        {% if not loop.last %}
+                                            <div class="border-t border-gray-300 my-4"></div>
+                                        {% endif %}
+                                    {% endfor %}
+                                </div>
+                                {% if field.vars.help %}
+                                    <p class="form-text text-gray-600 text-sm mt-2">{{ field.vars.help }}</p>
+                                {% endif %}
+                            </div>
+                        {% else %}
+                            {{ form_row(field, {'attr': field.vars.attr}) }}
+                        {% endif %}
+                    {% endif %}
+                {% endfor %}
+                
+                <div class="flex space-x-3 pt-4">
+                    {% if showPrevious %}
+                        {% if product_id is defined and product_id %}
+                            <a href="{{ path('product_edit', {'id': product_id, 'step': prevStep|default(step - 1)}) }}" class="flex-1 bg-gray-900 hover:bg-gray-800 text-white font-bold py-2 px-4 rounded text-center transition duration-200">
+                                ← Précédent
+                            </a>
+                        {% else %}
+                            <a href="{{ path('product_new', {'step': prevStep|default(step - 1)}) }}" class="flex-1 bg-gray-900 hover:bg-gray-800 text-white font-bold py-2 px-4 rounded text-center transition duration-200">
+                                ← Précédent
+                            </a>
+                        {% endif %}
+                    {% endif %}
+                    <button type="submit" class="{% if showPrevious %}flex-1{% else %}w-full{% endif %} bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded transition duration-200">
+                        Suivant →
+                    </button>
+                </div>
+            {{ form_end(form) }}
+
+            <a href="{{ path('product_index') }}" class="block text-center mt-4 text-blue-500 hover:text-blue-700">
+                Retour à la liste des produits
+            </a>
+        </div>
+    </div>
+{% endblock %}

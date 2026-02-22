@@ -24,6 +24,10 @@
                                 Tableau de Bord
                             </a>
                             
+                            <a href="{{ path('product_index') }}" class="block px-4 py-2 rounded hover:bg-gray-700 transition">
+                                Produits
+                            </a>
+
                             {% if is_granted('ROLE_ADMIN') %}
                                 <a href="{{ path('user_index') }}" class="block px-4 py-2 rounded hover:bg-gray-700 transition">
                                     Utilisateurs

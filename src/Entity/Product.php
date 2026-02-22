@@ -23,6 +23,9 @@ class Product
     #[ORM\Column(type: Types::DECIMAL, precision: 10, scale: 2)]
     private ?string $price = null;
 
+    #[ORM\Column(length: 50, nullable: true)]
+    private ?string $product_type = 'physical'; // 'physical' or 'digital'
+
     public function getId(): ?int
     {
         return $this->id;
@@ -60,6 +63,18 @@ class Product
     public function setPrice(string $price): static
     {
         $this->price = $price;
+
+        return $this;
+    }
+
+    public function getProductType(): ?string
+    {
+        return $this->product_type;
+    }
+
+    public function setProductType(string $product_type): static
+    {
+        $this->product_type = $product_type;
 
         return $this;
     }
