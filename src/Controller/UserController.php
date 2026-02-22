@@ -53,7 +53,7 @@ class UserController extends AbstractController
             $entityManager->persist($user);
             $entityManager->flush();
 
-            $this->addFlash('success', 'User created successfully!');
+            $this->addFlash('success', 'Utilisateur créé avec succès!');
             return $this->redirectToRoute('user_index');
         }
 
@@ -82,7 +82,7 @@ class UserController extends AbstractController
 
             $entityManager->flush();
 
-            $this->addFlash('success', 'User updated successfully!');
+            $this->addFlash('success', 'Utilisateur mis à jour avec succès!');
             return $this->redirectToRoute('user_index');
         }
 
@@ -101,7 +101,7 @@ class UserController extends AbstractController
         if ($this->isCsrfTokenValid('delete' . $user->getId(), $request->request->get('_token'))) {
             $entityManager->remove($user);
             $entityManager->flush();
-            $this->addFlash('success', 'User deleted successfully!');
+            $this->addFlash('success', 'Utilisateur supprimé avec succès!');
         }
 
         return $this->redirectToRoute('user_index');

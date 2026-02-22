@@ -23,24 +23,24 @@ class UserType extends AbstractType
             ->add('email', EmailType::class, [
                 'label' => 'Email',
                 'constraints' => [
-                    new NotBlank(['message' => 'Email is required']),
-                    new Email(['message' => 'Invalid email']),
+                    new NotBlank(['message' => 'L\'email est requis']),
+                    new Email(['message' => 'Email invalide']),
                 ],
             ])
             ->add('firstname', TextType::class, [
-                'label' => 'First Name',
+                'label' => 'Prénom',
                 'constraints' => [
-                    new NotBlank(['message' => 'First name is required']),
+                    new NotBlank(['message' => 'Le prénom est requis']),
                 ],
             ])
             ->add('lastname', TextType::class, [
-                'label' => 'Last Name',
+                'label' => 'Nom de Famille',
                 'constraints' => [
-                    new NotBlank(['message' => 'Last name is required']),
+                    new NotBlank(['message' => 'Le nom est requis']),
                 ],
             ])
             ->add('roles', ChoiceType::class, [
-                'label' => 'Roles',
+                'label' => 'Rôles',
                 'choices' => [
                     'User' => 'ROLE_USER',
                     'Manager' => 'ROLE_MANAGER',
@@ -53,20 +53,20 @@ class UserType extends AbstractType
         // Add password field only for new users
         if (!$options['edit_mode']) {
             $builder->add('plainPassword', PasswordType::class, [
-                'label' => 'Password',
+                'label' => 'Mot de passe',
                 'mapped' => false,
                 'constraints' => [
-                    new NotBlank(['message' => 'Password is required']),
-                    new Length(min: 6, minMessage: 'Password must be at least 6 characters long'),
+                    new NotBlank(['message' => 'Le mot de passe est requis']),
+                    new Length(min: 6, minMessage: 'Le mot de passe doit faire au moins 6 caractères.'),
                 ],
             ]);
         } else {
             $builder->add('plainPassword', PasswordType::class, [
-                'label' => 'New Password (leave blank to keep current)',
+                'label' => 'Nouveau mot de passe (laisser vide pour conserver l\'actuel)',
                 'mapped' => false,
                 'required' => false,
                 'constraints' => [
-                    new Length(min: 6, minMessage: 'Password must be at least 6 characters long'),
+                    new Length(min: 6, minMessage: 'Le mot de passe doit faire au moins 6 caractères.'),
                 ],
             ]);
         }

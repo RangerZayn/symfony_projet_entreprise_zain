@@ -1,15 +1,15 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Users Management{% endblock %}
+{% block title %}Gestion des Utilisateurs{% endblock %}
 
-{% block page_title %}Users Management{% endblock %}
+{% block page_title %}Gestion des Utilisateurs{% endblock %}
 
 {% block page_content %}
     <div class="container mx-auto px-4 py-8">
         <div class="flex justify-between items-center mb-6">
-            <h1 class="text-3xl font-bold">Users Management</h1>
+            <h1 class="text-3xl font-bold">Gestion des Utilisateurs</h1>
             <a href="{{ path('user_new') }}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-                Add New User
+                Ajouter un Utilisateur
             </a>
         </div>
 
@@ -19,9 +19,9 @@
                     <thead class="bg-gray-100 border-b-2 border-gray-300">
                         <tr>
                             <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700">Email</th>
-                            <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700">First Name</th>
-                            <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700">Last Name</th>
-                            <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700">Roles</th>
+                            <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700">Prénom</th>
+                            <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700">Nom de Famille</th>
+                            <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700">Rôles</th>
                             <th class="px-6 py-3 text-center text-sm font-semibold text-gray-700">Actions</th>
                         </tr>
                     </thead>
@@ -40,12 +40,12 @@
                                 </td>
                                 <td class="px-6 py-4 text-center text-sm space-x-2">
                                     <a href="{{ path('user_edit', {id: user.id}) }}" class="inline-block bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-1 px-3 rounded text-xs">
-                                        Edit
+                                        Modifier
                                     </a>
-                                    <form method="POST" action="{{ path('user_delete', {id: user.id}) }}" style="display:inline;" onsubmit="return confirm('Are you sure?');">
+                                    <form method="POST" action="{{ path('user_delete', {id: user.id}) }}" style="display:inline;" onsubmit="return confirm('Vous êtes sûr de vouloir supprimer?');">
                                         <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ user.id) }}">
                                         <button type="submit" class="bg-red-500 hover:bg-red-700 text-white font-bold py-1 px-3 rounded text-xs">
-                                            Delete
+                                            Supprimer
                                         </button>
                                     </form>
                                 </td>
@@ -56,7 +56,7 @@
             </div>
         {% else %}
             <div class="bg-gray-100 border border-gray-300 rounded px-4 py-3 text-gray-700">
-                No users found.
+                Aucun utilisateur trouvé.
             </div>
         {% endif %}
     </div>

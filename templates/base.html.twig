@@ -21,17 +21,17 @@
                         <h1 class="text-2xl font-bold mb-8">Backoffice</h1>
                         <nav class="space-y-2">
                             <a href="{{ path('app_home') }}" class="block px-4 py-2 rounded hover:bg-gray-700 transition">
-                                Dashboard
+                                Tableau de Bord
                             </a>
                             
                             {% if is_granted('ROLE_ADMIN') %}
                                 <a href="{{ path('user_index') }}" class="block px-4 py-2 rounded hover:bg-gray-700 transition">
-                                    Users
+                                    Utilisateurs
                                 </a>
                             {% endif %}
 
                             <a href="{{ path('app_logout') }}" class="block px-4 py-2 rounded hover:bg-gray-700 transition text-red-400 mt-8">
-                                Logout
+                                Déconnexion
                             </a>
                         </nav>
                     </div>
@@ -42,7 +42,7 @@
                         <div class="bg-white shadow px-6 py-4 flex justify-between items-center">
                             <h2 class="text-xl font-semibold text-gray-800">{% block page_title %}{% endblock %}</h2>
                             <div class="text-gray-700">
-                                Logged in as: <span class="font-semibold">{{ app.user.email }}</span>
+                                Connecté(e) en tant que: <span class="font-semibold">{{ app.user.email }}</span>
                             </div>
                         </div>
 

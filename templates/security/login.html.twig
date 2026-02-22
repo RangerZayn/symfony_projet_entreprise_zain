@@ -18,14 +18,14 @@
 
                 {% if app.user %}
                     <div class="mb-4 p-4 bg-green-100 border border-green-400 text-green-700 rounded">
-                        You are logged in as {{ app.user.email }}
+                        Vous êtes connecté(e) en tant que: {{ app.user.email }}
                     </div>
                 {% endif %}
 
                 <form method="post" class="space-y-6">
                     <div>
                         <label for="username" class="block text-sm font-medium text-gray-700 mb-1">
-                            Email Address
+                            Adresse Email
                         </label>
                         <input 
                             type="email" 
@@ -41,7 +41,7 @@
 
                     <div>
                         <label for="password" class="block text-sm font-medium text-gray-700 mb-1">
-                            Password
+                            Mot de passe
                         </label>
                         <input 
                             type="password" 
@@ -59,16 +59,16 @@
                         type="submit" 
                         class="w-full bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-md transition"
                     >
-                        Sign in
+                        Se connecter
                     </button>
                 </form>
 
                 <div class="mt-6 p-4 bg-blue-50 border border-blue-200 rounded text-sm text-gray-600">
-                    <p class="font-semibold mb-2">Demo Accounts:</p>
+                    <p class="font-semibold mb-2">Comptes de démonstration :</p>
                     <ul class="space-y-1">
-                        <li><strong>Admin:</strong> admin@example.com / adminpassword</li>
+                        <li><strong>Administrateur:</strong> admin@example.com / adminpassword</li>
                         <li><strong>Manager:</strong> manager@example.com / managerpassword</li>
-                        <li><strong>User:</strong> user@example.com / userpassword</li>
+                        <li><strong>Utilisateur:</strong> user@example.com / userpassword</li>
                     </ul>
                 </div>
             </div>
