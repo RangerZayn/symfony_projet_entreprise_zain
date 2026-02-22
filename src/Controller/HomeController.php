@@ -5,12 +5,14 @@ namespace App\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 class HomeController extends AbstractController
 {
-    #[Route('/home', name: 'home')]
+    #[Route('/', name: 'app_home')]
+    #[IsGranted('ROLE_USER')]
     public function index(): Response
     {
-        return $this->render('base.html.twig');
+        return $this->render('home/index.html.twig');
     }
 }

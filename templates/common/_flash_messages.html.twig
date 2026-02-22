@@ -1,12 +1,42 @@
 {% for message in app.flashes('success') %}
-    <div class="toast-container position-fixed top-0 start-50 translate-middle mt-5 p-3">
-        <div class="toast fade show align-items-center text-bg-success border-0 shadow" role="alert" aria-live="assertive" aria-atomic="true">
-            <div class="d-flex">
-                <div class="toast-body">{{ message }}</div>
-                <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
-            </div>
+    <div class="fixed top-4 right-4 bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded shadow-lg z-50">
+        <div class="flex justify-between items-center">
+            <span>{{ message }}</span>
+            <button type="button" class="ml-4 font-semibold text-green-700 hover:text-green-900">&times;</button>
         </div>
     </div>
 {% endfor %}
+
+{% for message in app.flashes('error') %}
+    <div class="fixed top-4 right-4 bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded shadow-lg z-50">
+        <div class="flex justify-between items-center">
+            <span>{{ message }}</span>
+            <button type="button" class="ml-4 font-semibold text-red-700 hover:text-red-900">&times;</button>
+        </div>
+    </div>
+{% endfor %}
+
+{% for message in app.flashes('info') %}
+    <div class="fixed top-4 right-4 bg-blue-100 border border-blue-400 text-blue-700 px-4 py-3 rounded shadow-lg z-50">
+        <div class="flex justify-between items-center">
+            <span>{{ message }}</span>
+            <button type="button" class="ml-4 font-semibold text-blue-700 hover:text-blue-900">&times;</button>
+        </div>
+    </div>
+{% endfor %}
+
+<script>
+    document.querySelectorAll('.fixed').forEach(alert => {
+        setTimeout(() => {
+            alert.style.display = 'none';
+        }, 5000);
+    });
+    
+    document.querySelectorAll('button[type="button"]').forEach(btn => {
+        btn.addEventListener('click', () => {
+            btn.closest('.fixed').style.display = 'none';
+        });
+    });
+</script>
 
 

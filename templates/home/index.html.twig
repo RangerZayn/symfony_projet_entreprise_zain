@@ -1,0 +1,88 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Dashboard{% endblock %}
+
+{% block page_title %}Dashboard{% endblock %}
+
+{% block page_content %}
+    <div class="container mx-auto px-4 py-8">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+            <!-- Welcome Card -->
+            <div class="bg-white rounded-lg shadow p-6 col-span-1 md:col-span-3">
+                <h2 class="text-2xl font-bold text-gray-800 mb-2">Welcome to the Backoffice!</h2>
+                <p class="text-gray-600">
+                    Hello <span class="font-semibold">{{ app.user.firstname }} {{ app.user.lastname }}</span>, 
+                    you are logged in with role:
+                    <span class="inline-block bg-blue-200 text-blue-800 text-sm px-2 py-1 rounded ml-1">
+                        {% if is_granted('ROLE_ADMIN') %}
+                            ADMIN
+                        {% elseif is_granted('ROLE_MANAGER') %}
+                            MANAGER
+                        {% else %}
+                            USER
+                        {% endif %}
+                    </span>
+                </p>
+            </div>
+
+            <!-- Users Card (visible to admins) -->
+            {% if is_granted('ROLE_ADMIN') %}
+                <div class="bg-white rounded-lg shadow p-6 hover:shadow-lg transition">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <h3 class="text-lg font-semibold text-gray-800">Users Management</h3>
+                            <p class="text-gray-600 text-sm">Manage application users and roles</p>
+                        </div>
+                        <div class="text-4xl text-blue-500">👥</div>
+                    </div>
+                    <a href="{{ path('user_index') }}" class="mt-4 inline-block bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded transition">
+                        Go to Users
+                    </a>
+                </div>
+            {% endif %}
+
+            <!-- Products Card -->
+            <div class="bg-white rounded-lg shadow p-6 hover:shadow-lg transition">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <h3 class="text-lg font-semibold text-gray-800">Products</h3>
+                        <p class="text-gray-600 text-sm">Coming soon...</p>
+                    </div>
+                    <div class="text-4xl">📦</div>
+                </div>
+            </div>
+
+            <!-- Clients Card -->
+            <div class="bg-white rounded-lg shadow p-6 hover:shadow-lg transition">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <h3 class="text-lg font-semibold text-gray-800">Clients</h3>
+                        <p class="text-gray-600 text-sm">Coming soon...</p>
+                    </div>
+                    <div class="text-4xl">🏢</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Quick Info -->
+        <div class="bg-white rounded-lg shadow p-6">
+            <h3 class="text-lg font-semibold text-gray-800 mb-4">Quick Info</h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                    <p class="text-gray-600 text-sm">Current User</p>
+                    <p class="text-lg font-semibold text-gray-800">{{ app.user.email }}</p>
+                </div>
+                <div>
+                    <p class="text-gray-600 text-sm">Assigned Roles</p>
+                    <div class="space-y-1 mt-1">
+                        {% for role in app.user.roles %}
+                            <span class="inline-block bg-gray-200 text-gray-800 text-xs px-2 py-1 rounded mr-1">
+                                {{ role|replace({'ROLE_': ''}) }}
+                            </span>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
