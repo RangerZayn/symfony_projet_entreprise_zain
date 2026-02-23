@@ -434,6 +434,7 @@ class ProductController extends AbstractController
     }
 
     #[Route('/export/csv', name: 'product_export_csv', methods: ['GET'])]
+    #[IsGranted('ROLE_ADMIN')]
     public function exportCsv(ProductRepository $repo, ProductCsvExporter $exporter): StreamedResponse
     {
         $products = $repo->findAllSortedByPriceDesc();

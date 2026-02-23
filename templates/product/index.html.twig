@@ -54,9 +54,11 @@
             </div>
 
             <div class="mt-6">
-                <a href="{{ path('product_export_csv') }}" class="bg-gray-900 hover:bg-gray-800 text-white font-bold py-2 px-4 rounded">
-                    Exporter CSV
-                </a>
+                {% if is_granted('ROLE_ADMIN') %}
+                    <a href="{{ path('product_export_csv') }}" class="bg-gray-900 hover:bg-gray-800 text-white font-bold py-2 px-4 rounded">
+                        Exporter CSV
+                    </a>
+                {% endif %}
             </div>
         {% else %}
             <div class="bg-gray-100 border border-gray-300 rounded px-4 py-3 text-gray-700">

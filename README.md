@@ -52,65 +52,63 @@ php bin/console doctrine:fixtures:load
 php bin/console tailwind:build
 ```
 
-### 7. Lancer le serveur local
+### 7. Accéder au projet
 
-```bash
-php -S 127.0.0.1:8000 -t public/
-```
-
-Accédez à http://localhost:8000
+Ouvrir votre navigateur et accéder à http://symfony_base.local
 
 ## Comptes de test
 
 Trois utilisateurs sont créés automatiquement via les fixtures :
 
-- **Admin** : `admin@example.com` / `adminpassword` (ROLE_ADMIN)
+- **Administrateur** : `admin@example.com` / `adminpassword` (ROLE_ADMIN)
 - **Manager** : `manager@example.com` / `managerpassword` (ROLE_MANAGER)
 - **Utilisateur** : `user@example.com` / `userpassword` (ROLE_USER)
+
+Libre aussi à vous d'en créer d'autres.
 
 ## Fonctionnalités implémentées
 
 ### 👤 Gestion des Utilisateurs
-- ✅ Liste, création, modification et suppression d'utilisateurs
-- ✅ Attribution de rôles (ADMIN, MANAGER, USER)
-- ✅ Hachage sécurisé des mots de passe
-- ✅ Validation des emails uniques
-- ✅ Accès réservé aux administrateurs
+- Liste, création, modification et suppression d'utilisateurs
+- Attribution de rôles (ADMIN, MANAGER, USER)
+- Hachage sécurisé des mots de passe
+- Validation des emails uniques
+- Accès réservé aux administrateurs
 
 ### 📦 Gestion des Produits
-- ✅ Catalogue complet avec liste paginée
-- ✅ Création multi-étapes selon le type de produit (physique/digital)
-- ✅ Édition avec conservation du type de produit
-- ✅ Suppression avec confirmation
-- ✅ Export CSV de tous les produits
-- ✅ Import de produits via fichier CSV
-- ✅ Validation des prix (avec seuils de confirmation)
-- ✅ Accès réservé aux administrateurs
+- Catalogue complet avec liste paginée
+- Création multi-étapes selon le type de produit (physique/digital)
+- Édition avec conservation du type de produit
+- Suppression avec confirmation
+- Export CSV de tous les produits
+- Import de produits via fichier CSV
+- Validation des prix (avec seuils de confirmation)
+- Accès disponible à tous les utilisateurs
 
 ### 👥 Gestion des Clients (Animalerie)
-- ✅ Liste complète des clients avec tri par nom
-- ✅ Création de nouveaux clients avec validation complète
-- ✅ Modification des informations clients
-- ✅ Suppression de clients
-- ✅ Validation des emails uniques
-- ✅ Formatage automatique des numéros de téléphone (+33)
-- ✅ Historique de création (date/heure)
-- ✅ Accès réservé aux managers et administrateurs
+- Liste complète des clients avec tri par nom
+- Création de nouveaux clients avec validation complète
+- Modification des informations clients
+- Suppression de clients
+- Validation des emails uniques
+- Formatage automatique des numéros de téléphone (+33)
+- Historique de création (date/heure)
+- Accès réservé aux managers et administrateurs
 
 ### 🔐 Sécurité et Contrôle d'accès
-- ✅ Système de voter personnalisé pour chaque module
-- ✅ Authentification par email et mot de passe
-- ✅ Rôles granulaires (ADMIN, MANAGER, USER)
-- ✅ Permissions basées sur les rôles et les voters
-- ✅ Données utilisateur affichées dans l'en-tête
+- Système de voter personnalisé pour chaque module
+- Authentification par email et mot de passe
+- Rôles granulaires (ADMIN, MANAGER, USER)
+- Permissions basées sur les rôles et les voters
+- Données utilisateur affichées dans l'en-tête
 
 ### 🎨 Interface utilisateur
-- ✅ Tableau de bord centralisé avec statistiques rapides
-- ✅ Barre latérale responsive avec navigation par rôle
-- ✅ Formulaires validés côté client et serveur
-- ✅ Messages d'erreur en rouge avec contraintes visuelles
-- ✅ Styling cohérent avec Tailwind CSS v4.1.11
-- ✅ Indicateurs visuels pour les actions (création, modification, suppression)
+- Tableau de bord centralisé avec statistiques rapides
+- Barre latérale responsive avec navigation par rôle
+- Formulaires validés côté client et serveur
+- Messages d'erreur en rouge avec contraintes visuelles
+- Styling cohérent avec Tailwind CSS v4.1.11
+- Indicateurs visuels pour les actions (création, modification, suppression)
 
 ### 🛠️ Outils CLI
 
@@ -121,14 +119,14 @@ php bin/console app:client:create
 
 #### Importer des produits depuis CSV
 ```bash
-php bin/console app:product:import path/to/file.csv
+php bin/console app:product:import chemin_du_fichier/produits.csv
 ```
 
 Format CSV attendu :
 ```
-name,description,price
-Produit 1,Description du produit,29.99
-Produit 2,Autre description,49.99
+id,name,description,price
+id1,Produit 1,Description du produit,29.99
+id2,Produit 2,Autre description,49.99
 ```
 
 ## Structure du projet
@@ -179,3 +177,7 @@ templates/
 - [Symfony Documentation](https://symfony.com/doc/7.4/index.html)
 - [Doctrine ORM](https://www.doctrine-project.org/)
 - [Tailwind CSS](https://tailwindcss.com/)
+
+---
+
+AIT BAMMOU Zain-Alabaidine BUT3 Informatique - Groupe 2 RA
