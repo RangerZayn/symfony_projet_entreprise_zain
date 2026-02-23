@@ -174,7 +174,7 @@ templates/
 
 ## Démonstration
 
-Une vidéo intitulée **demonstartion.mp4** se trouvant à la racine du projet vous permet de voir l'aperçu rapide du backoffice.
+Une vidéo intitulée **demonstration.mp4** se trouvant à la racine du projet vous permet de voir l'aperçu rapide du backoffice.
 
 ## Documentation supplémentaire
 
