@@ -1,0 +1,17 @@
+{% block form_row -%}
+    <div class="mb-4">
+        {{- form_label(form) -}}
+        {{- form_widget(form) -}}
+        {{- form_errors(form) -}}
+    </div>
+{%- endblock form_row %}
+
+{% block form_errors -%}
+    {%- if errors|length > 0 -%}
+        <ul class="list-disc list-inside text-red-600 text-sm mt-1 space-y-1">
+            {%- for error in errors -%}
+                <li>{{ error.message }}</li>
+            {%- endfor -%}
+        </ul>
+    {%- endif -%}
+{%- endblock form_errors %}

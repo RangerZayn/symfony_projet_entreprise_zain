@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Modifier Client{% endblock %}
+
+{% block page_title %}Modifier Client{% endblock %}
+
+{% block page_content %}
+    <div class="container mx-auto px-4 py-8">
+        <h1 class="text-3xl font-bold mb-6">Modifier le client</h1>
+
+        <div class="max-w-md mx-auto bg-white rounded-lg shadow px-6 py-8">
+            {{ form_start(form, {'attr': {'class': 'space-y-4'}}) }}
+            
+                {{ form_row(form.firstname, {'attr': {'class': 'w-full px-4 py-2 border border-gray-300 rounded'}}) }}
+                {{ form_row(form.lastname, {'attr': {'class': 'w-full px-4 py-2 border border-gray-300 rounded'}}) }}
+                {{ form_row(form.email, {'attr': {'class': 'w-full px-4 py-2 border border-gray-300 rounded'}}) }}
+                {{ form_row(form.phoneNumber, {'attr': {'class': 'w-full px-4 py-2 border border-gray-300 rounded'}}) }}
+                {{ form_row(form.address, {'attr': {'class': 'w-full px-4 py-2 border border-gray-300 rounded'}}) }}
+
+                <button type="submit" class="w-full bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                    Enregistrer les modifications
+                </button>
+            
+            {{ form_end(form) }}
+
+            <a href="{{ path('client_index') }}" class="block text-center mt-4 text-blue-500 hover:text-blue-700">
+                Retour à la liste des clients
+            </a>
+        </div>
+    </div>
+{% endblock %}

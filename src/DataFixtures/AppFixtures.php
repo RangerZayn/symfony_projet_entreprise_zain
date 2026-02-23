@@ -4,6 +4,7 @@ namespace App\DataFixtures;
 
 use App\Entity\User;
 use App\Entity\Product;
+use App\Entity\Client;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
@@ -120,6 +121,90 @@ class AppFixtures extends Fixture
             $product->setPrice($productData['price']);
             $product->setProductType($productData['type']);
             $manager->persist($product);
+        }
+
+        // Create pet store clients
+        $clients = [
+            [
+                'firstname' => 'Marie',
+                'lastname' => 'Fontaine',
+                'email' => 'marie.fontaine@email.com',
+                'phone' => '+33612345678',
+                'address' => '42 Rue des Animaux, 75015 Paris',
+            ],
+            [
+                'firstname' => 'Jean-Louis',
+                'lastname' => 'Dupont',
+                'email' => 'jean.dupont@email.com',
+                'phone' => '+33798765432',
+                'address' => '10 Avenue du Chat, 13000 Marseille',
+            ],
+            [
+                'firstname' => 'Sophie',
+                'lastname' => 'Martin',
+                'email' => 'sophie.martin@email.com',
+                'phone' => '+33645678901',
+                'address' => '25 Boulevard de la Faune, 69000 Lyon',
+            ],
+            [
+                'firstname' => 'Pierre',
+                'lastname' => 'Bernard',
+                'email' => 'pierre.bernard@email.com',
+                'phone' => '+33723456789',
+                'address' => '99 Route du Chien, 59000 Lille',
+            ],
+            [
+                'firstname' => 'Isabelle',
+                'lastname' => 'Laurent',
+                'email' => 'isabelle.laurent@email.com',
+                'phone' => '+33689012345',
+                'address' => '15 Impasse de l\'Oiseau, 33000 Bordeaux',
+            ],
+            [
+                'firstname' => 'François',
+                'lastname' => 'Rousseau',
+                'email' => 'francois.rousseau@email.com',
+                'phone' => '+33756789012',
+                'address' => '77 Chemin du Lapin, 31000 Toulouse',
+            ],
+            [
+                'firstname' => 'Nathalie',
+                'lastname' => 'Garnier',
+                'email' => 'nathalie.garnier@email.com',
+                'phone' => '+33634567890',
+                'address' => '8 Place du Poisson, 06000 Nice',
+            ],
+            [
+                'firstname' => 'Cédric',
+                'lastname' => 'Mercier',
+                'email' => 'cedric.mercier@email.com',
+                'phone' => '+33712345678',
+                'address' => '50 Square du Hamster, 67000 Strasbourg',
+            ],
+            [
+                'firstname' => 'Valérie',
+                'lastname' => 'Petit',
+                'email' => 'valerie.petit@email.com',
+                'phone' => '+33678901234',
+                'address' => '33 Rue de la Tortue, 44000 Nantes',
+            ],
+            [
+                'firstname' => 'Michel',
+                'lastname' => 'Lefevre',
+                'email' => 'michel.lefevre@email.com',
+                'phone' => '+33790123456',
+                'address' => '22 Avenue du Perroquet, 38000 Grenoble',
+            ],
+        ];
+
+        foreach ($clients as $clientData) {
+            $client = new Client();
+            $client->setFirstname($clientData['firstname']);
+            $client->setLastname($clientData['lastname']);
+            $client->setEmail($clientData['email']);
+            $client->setPhoneNumber($clientData['phone']);
+            $client->setAddress($clientData['address']);
+            $manager->persist($client);
         }
 
         $manager->flush();

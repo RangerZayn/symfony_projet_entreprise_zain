@@ -17,7 +17,7 @@ class ProductRepository extends ServiceEntityRepository
     }
 
     /**
-     * Return all products ordered by price descending
+     * Retourne tous les produits triés par prix décroissant
      *
      * @return Product[]
      */
