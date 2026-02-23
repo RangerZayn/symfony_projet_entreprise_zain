@@ -54,7 +54,7 @@ php bin/console tailwind:build
 
 ### 7. Accéder au projet
 
-Ouvrir votre navigateur et accéder à http://symfony_base.local
+Ouvrir votre navigateur et accéder à **http://symfony_base.local**
 
 ## Comptes de test
 
@@ -171,6 +171,10 @@ templates/
 - **JavaScript** : Stimulus pour l'interactivité
 - **Validation** : Symfony Validator avec contraintes personnalisées
 - **Sécurité** : Voters, hachage bcrypt, CSRF tokens
+
+## Démonstration
+
+Une vidéo intitulée **demonstartion.mp4** se trouvant à la racine du projet vous permet de voir l'aperçu rapide du backoffice.
 
 ## Documentation supplémentaire
 
