@@ -20,7 +20,6 @@ class FormFlowController extends AbstractController
             ->handleRequest($request);
 
         if ($flow->isSubmitted() && $flow->isValid() && $flow->isFinished()) {
-            // do something with $flow->getData();
 
             $this->addFlash('success', 'Your form flow was successfully finished!');
 

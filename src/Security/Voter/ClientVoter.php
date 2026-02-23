@@ -23,7 +23,7 @@ class ClientVoter extends Voter
     {
         $user = $token->getUser();
 
-        // Not authenticated
+        // Non connectés ne peuvent rien faire
         if (!is_object($user)) {
             return false;
         }
@@ -39,25 +39,25 @@ class ClientVoter extends Voter
 
     private function canView($user): bool
     {
-        // Only ROLE_ADMIN and ROLE_MANAGER can view
+        // Seuls les ROLE_ADMIN et ROLE_MANAGER peuvent voir les clients
         return in_array('ROLE_ADMIN', $user->getRoles()) || in_array('ROLE_MANAGER', $user->getRoles());
     }
 
     private function canCreate($user): bool
     {
-        // Only ROLE_ADMIN and ROLE_MANAGER can create
+        // Seuls les ROLE_ADMIN et ROLE_MANAGER peuvent créer des clients
         return in_array('ROLE_ADMIN', $user->getRoles()) || in_array('ROLE_MANAGER', $user->getRoles());
     }
 
     private function canEdit($user): bool
     {
-        // Only ROLE_ADMIN and ROLE_MANAGER can edit
+        // Seuls les ROLE_ADMIN et ROLE_MANAGER peuvent modifier les clients
         return in_array('ROLE_ADMIN', $user->getRoles()) || in_array('ROLE_MANAGER', $user->getRoles());
     }
 
     private function canDelete($user): bool
     {
-        // Only ROLE_ADMIN can delete
+        // Seuls les ROLE_ADMIN peuvent supprimer les clients
         return in_array('ROLE_ADMIN', $user->getRoles());
     }
 }

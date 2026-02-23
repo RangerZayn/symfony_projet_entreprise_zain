@@ -13,7 +13,7 @@ use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 #[AsCommand(
     name: 'app:client:create',
-    description: 'Create a new client interactively'
+    description: 'Crée un nouveau client via la ligne de commande',
 )]
 class ClientCreateCommand extends Command
 {
@@ -34,11 +34,11 @@ class ClientCreateCommand extends Command
         $output->writeln('<info>Création d\'un nouveau client</info>');
         $output->writeln('');
 
-        // Firstname
+        // Prénom
         $question = new Question('Prénom: ');
         $firstname = $helper->ask($input, $output, $question);
 
-        // Lastname
+        // Nom  
         $question = new Question('Nom: ');
         $lastname = $helper->ask($input, $output, $question);
 
@@ -46,29 +46,29 @@ class ClientCreateCommand extends Command
         $question = new Question('Email: ');
         $email = $helper->ask($input, $output, $question);
 
-        // Phone (required)
+        // Téléphone (requis)
         $question = new Question('Téléphone (format: 0XXXXXXXXX ou +33XXXXXXXXX): ');
         $phone = $helper->ask($input, $output, $question);
 
-        // Address (required)
+        // Address (requis)
         $question = new Question('Adresse: ');
         $address = $helper->ask($input, $output, $question);
 
         $output->writeln('');
 
-        // Create client
+        // Création du client
         $client = new Client();
         $client->setFirstname($firstname);
         $client->setLastname($lastname);
         $client->setEmail($email);
         
-        // Format phone number
+        // Formatter le numéro de téléphone avant de le définir
         $formattedPhone = $this->formatPhoneNumber($phone);
         $client->setPhoneNumber($formattedPhone);
         
         $client->setAddress($address);
 
-        // Validate
+        // Valider le client
         $errors = $this->validator->validate($client);
         if (count($errors) > 0) {
             $output->writeln('<error>Erreur de validation:</error>');
@@ -78,7 +78,7 @@ class ClientCreateCommand extends Command
             return Command::FAILURE;
         }
 
-        // Persist and flush
+        // Persister le client en base de données
         try {
             $this->em->persist($client);
             $this->em->flush();
@@ -98,14 +98,14 @@ class ClientCreateCommand extends Command
 
     private function formatPhoneNumber(string $phone): string
     {
-        // Remove all non-digit and + characters
+        // Retirer tous les caractères non numériques et les +
         $cleaned = preg_replace('/[^\d\+]/', '', $phone);
 
-        // Format to +33 if it starts with 0
+        // Formatter à +33 si le numéro commence par 0
         if (preg_match('/^0/', $cleaned)) {
             $cleaned = '+33' . substr($cleaned, 1);
         }
-        // Add +33 prefix if it doesn't have it and has 9 digits
+        // Ajouter le préfixe +33 si le numéro n'a pas de préfixe et contient 9 chiffres
         elseif (!preg_match('/^\+/', $cleaned) && strlen($cleaned) == 9) {
             $cleaned = '+33' . $cleaned;
         }

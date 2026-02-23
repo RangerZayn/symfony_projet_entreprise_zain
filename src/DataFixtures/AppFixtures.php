@@ -20,7 +20,7 @@ class AppFixtures extends Fixture
 
     public function load(ObjectManager $manager): void
     {
-        // Create Admin User
+        // Créer un utilisateur admin
         $admin = new User();
         $admin->setEmail('admin@example.com');
         $admin->setFirstname('Admin');
@@ -30,7 +30,7 @@ class AppFixtures extends Fixture
         $admin->setPassword($hashedPassword);
         $manager->persist($admin);
 
-        // Create Manager User
+        // Créer un utilisateur manager
         $managerUser = new User();
         $managerUser->setEmail('manager@example.com');
         $managerUser->setFirstname('Manager');
@@ -40,7 +40,7 @@ class AppFixtures extends Fixture
         $managerUser->setPassword($hashedPassword);
         $manager->persist($managerUser);
 
-        // Create Standard User
+        // Créer un utilisateur standard
         $user = new User();
         $user->setEmail('user@example.com');
         $user->setFirstname('Standard');
@@ -50,7 +50,7 @@ class AppFixtures extends Fixture
         $user->setPassword($hashedPassword);
         $manager->persist($user);
 
-        // Create pet store products
+        // Créer des produits fictifs
         $petProducts = [
             [
                 'name' => 'Croquettes Premium Chat Adulte',
@@ -123,7 +123,7 @@ class AppFixtures extends Fixture
             $manager->persist($product);
         }
 
-        // Create pet store clients
+        // Créer des clients fictifs
         $clients = [
             [
                 'firstname' => 'Marie',

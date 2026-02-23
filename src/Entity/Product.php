@@ -24,7 +24,7 @@ class Product
     private ?string $price = null;
 
     #[ORM\Column(length: 50, nullable: true)]
-    private ?string $product_type = 'physical'; // 'physical' or 'digital'
+    private ?string $product_type = 'physical'; // 'physique' ou 'digital'
 
     public function getId(): ?int
     {

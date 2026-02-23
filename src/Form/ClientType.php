@@ -35,7 +35,7 @@ class ClientType extends AbstractType
                 'required' => true,
             ]);
 
-        // Add transformer for phone number formatting
+        // Ajout d'un DataTransformer pour formater le numéro de téléphone
         $builder->get('phoneNumber')->addModelTransformer(new class implements DataTransformerInterface {
             public function transform($value): mixed
             {
@@ -43,10 +43,10 @@ class ClientType extends AbstractType
                     return '';
                 }
                 // Format: +33 6 12 34 56 78
-                // Remove all non-digit and + characters
+                // Retire tous les espaces et caractères spéciaux, ne garder que les chiffres et le +
                 $cleaned = preg_replace('/[^\d\+]/', '', $value);
                 
-                // Format with spaces: +33 X XX XX XX XX
+                // Format avec espaces: +33 X XX XX XX XX
                 if (preg_match('/^\+(\d{2})(\d)(\d{2})(\d{2})(\d{2})(\d{2})$/', $cleaned, $matches)) {
                     return '+' . $matches[1] . ' ' . $matches[2] . ' ' . $matches[3] . ' ' . $matches[4] . ' ' . $matches[5] . ' ' . $matches[6];
                 }
@@ -58,14 +58,14 @@ class ClientType extends AbstractType
                 if (!$value) {
                     return null;
                 }
-                // Remove all spaces and special chars, keep only digits and +
+                // Retire tous les espaces et caractères spéciaux, ne garder que les chiffres et le +
                 $cleaned = preg_replace('/[^\d\+]/', '', $value);
 
-                // Format to +33 if it starts with 0
+                // Format avec +33: si le numéro commence par 0, remplacer par +33
                 if (preg_match('/^0/', $cleaned)) {
                     $cleaned = '+33' . substr($cleaned, 1);
                 }
-                // Add +33 prefix if it doesn't have it
+                // Ajouter +33 si le numéro commence par 6 ou 7 et ne commence pas déjà par +33
                 elseif (!preg_match('/^\+/', $cleaned)) {
                     $cleaned = '+33' . $cleaned;
                 }

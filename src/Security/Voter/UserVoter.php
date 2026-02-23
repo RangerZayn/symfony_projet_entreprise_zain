@@ -22,7 +22,7 @@ class UserVoter extends Voter
     {
         $user = $token->getUser();
 
-        // Only admins can manage users
+        // Seuls les administrateurs peuvent voir, éditer ou supprimer les utilisateurs
         if (!in_array('ROLE_ADMIN', $user->getRoles())) {
             return false;
         }

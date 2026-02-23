@@ -36,18 +36,18 @@ class ProductVoter extends Voter
             return false;
         }
 
-        // Admins can do anything
+        // Les administrateurs ont tous les droits
         if (in_array('ROLE_ADMIN', $user->getRoles(), true)) {
             return true;
         }
 
         switch ($attribute) {
             case self::VIEW:
-                return true; // any authenticated user
+                return true; // n'importe qui peut voir les produits
             case self::CREATE:
             case self::EDIT:
             case self::DELETE:
-                return false; // only admin
+                return false; // seuls les admins peuvent créer, éditer ou supprimer des produits
         }
 
         return false;
