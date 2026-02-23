@@ -1,65 +1,181 @@
-# Symfony 7.4 Boilerplate 
+# Backoffice Animalerie - Symfony 7.4
 
-Attention : Il vous faut PHP >=8.2 pour faire fonctionner ce projet.
+Système complet de gestion de backoffice pour une animalerie (pet store), avec gestion des utilisateurs, produits et clients.
 
-## Initialisation de votre IDE
+**Prérequis:** PHP >=8.2, Composer, MySQL/MariaDB
 
-### PHPStorm
+## Installation
 
-1. Ouvrir le projet dans PHPStorm
-2. Installer les extensions Twig et Symfony
-    - Aller dans File > Settings > Plugins
-    - Installer les extensions (Twig, EA Inspection, PHP Annotations, .env files support)
+### 1. Cloner le projet
 
-### Visual Studio Code
+```bash
+git clone <repository-url>
+cd symfony_projet_entreprise_zain
+```
 
-1. Ouvrir le projet dans Visual Studio Code
-2. Installer les extensions pour PHP, Twig et Symfony
-    - Aller dans l'onglet Extensions
-    - Installer les extensions (whatwedo.twig, TheNouillet.symfony-vscode, DEVSENSE.phptools-vscode, 
-    bmewburn.vscode-intelephense-client, zobo.php-intellisense)
+### 2. Installer les dépendances
 
-## Installation avec IDX
+```bash
+composer install
+```
 
-1. Fork le projet sur votre compte GitHub
-2. Importer le projet depuis votre GitHub sur IDX
-3. Le projet est déjà lancé il suffit d'aller dans l'onglet du terminal avec `start` puis cliquer sur le lien `localhost`
-4. Lancer la commande `composer i` pour installer les dépendances du projet.
-5. Pour accéder à la base de données `mysql -u root`
-6. Dans un fichier à la racine `.env.local` mettre cette variable d'environnement 
-`DATABASE_URL="mysql://root:@127.0.0.1:3306/app?serverVersion=10.11.2-MariaDB&charset=utf8mb4"`
+### 3. Configurer la base de données
 
-## Installation en local
+Créer un fichier `.env.local` à la racine du projet :
 
-1. Cloner le projet
-2. Installer PHP >= 8.2 et Composer (Sur votre machine utiliser XAMPP pour windows, MAMP pour mac ou LAMP pour linux bien prendre la version PHP 8.2)
-3. Installer les dépendances du projet avec la commande `composer install`
-4. Faire un virtual host sur votre serveur local (XAMPP par exemple pour Windows) 
- - Ouvrir le fichier `httpd-vhosts.conf` dans le répertoire `C:\xampp\apache\conf\extra`
-    - Ajouter le code suivant à la fin du fichier
-    ```
-    <VirtualHost *>
-        DocumentRoot "C:\Users\votre_username\Documents\iut\symfony_base\public"
-        ServerName symfony_base.local
-        
-        <Directory "C:\Users\votre_username\Documents\iut\symfony_base\public">
-            AllowOverride All
-            Require all granted
-        </Directory>
-    </VirtualHost>
-    ```
-    - Ajouter l'adresse IP de votre machine dans le fichier `C:\Windows\System32\drivers\etc\hosts`
-    ```
-    127.0.0.1 symfony_base.local
-    ```
-    - Redémarrer Apache
-    - Accéder à l'adresse `symfony_base.local` dans votre navigateur
+```env
+DATABASE_URL="mysql://root:password@127.0.0.1:3306/app?serverVersion=10.11&charset=utf8mb4"
+```
 
-4. Créer un fichier `.env.local` à la racine du projet et ajouter la configuration de la base de données
-5. Créer la base de données avec la commande `php bin/console doctrine:database:create`
+Ou si vous utilisez XAMPP sans mot de passe :
 
-## Utilisation
+```env
+DATABASE_URL="mysql://root:@127.0.0.1:3306/app?serverVersion=10.11&charset=utf8mb4"
+```
 
-- N'hésitez pas à consulter la documentation de Symfony pour plus d'informations sur l'utilisation du framework : https://symfony.com/doc/current/index.html
+### 4. Créer la base de données et exécuter les migrations
 
-- Notez comment fonctionne votre projet dans le fichier README.md et mettez à jour ce fichier au fur et à mesure de l'avancement de votre projet pour aider les autres développeurs à comprendre comment fonctionne votre projet.
+```bash
+php bin/console doctrine:database:create
+php bin/console doctrine:migrations:migrate
+```
+
+### 5. Charger les données de test
+
+```bash
+php bin/console doctrine:fixtures:load
+```
+
+### 6. Builder les assets Tailwind
+
+```bash
+php bin/console tailwind:build
+```
+
+### 7. Lancer le serveur local
+
+```bash
+php -S 127.0.0.1:8000 -t public/
+```
+
+Accédez à http://localhost:8000
+
+## Comptes de test
+
+Trois utilisateurs sont créés automatiquement via les fixtures :
+
+- **Admin** : `admin@example.com` / `adminpassword` (ROLE_ADMIN)
+- **Manager** : `manager@example.com` / `managerpassword` (ROLE_MANAGER)
+- **Utilisateur** : `user@example.com` / `userpassword` (ROLE_USER)
+
+## Fonctionnalités implémentées
+
+### 👤 Gestion des Utilisateurs
+- ✅ Liste, création, modification et suppression d'utilisateurs
+- ✅ Attribution de rôles (ADMIN, MANAGER, USER)
+- ✅ Hachage sécurisé des mots de passe
+- ✅ Validation des emails uniques
+- ✅ Accès réservé aux administrateurs
+
+### 📦 Gestion des Produits
+- ✅ Catalogue complet avec liste paginée
+- ✅ Création multi-étapes selon le type de produit (physique/digital)
+- ✅ Édition avec conservation du type de produit
+- ✅ Suppression avec confirmation
+- ✅ Export CSV de tous les produits
+- ✅ Import de produits via fichier CSV
+- ✅ Validation des prix (avec seuils de confirmation)
+- ✅ Accès réservé aux administrateurs
+
+### 👥 Gestion des Clients (Animalerie)
+- ✅ Liste complète des clients avec tri par nom
+- ✅ Création de nouveaux clients avec validation complète
+- ✅ Modification des informations clients
+- ✅ Suppression de clients
+- ✅ Validation des emails uniques
+- ✅ Formatage automatique des numéros de téléphone (+33)
+- ✅ Historique de création (date/heure)
+- ✅ Accès réservé aux managers et administrateurs
+
+### 🔐 Sécurité et Contrôle d'accès
+- ✅ Système de voter personnalisé pour chaque module
+- ✅ Authentification par email et mot de passe
+- ✅ Rôles granulaires (ADMIN, MANAGER, USER)
+- ✅ Permissions basées sur les rôles et les voters
+- ✅ Données utilisateur affichées dans l'en-tête
+
+### 🎨 Interface utilisateur
+- ✅ Tableau de bord centralisé avec statistiques rapides
+- ✅ Barre latérale responsive avec navigation par rôle
+- ✅ Formulaires validés côté client et serveur
+- ✅ Messages d'erreur en rouge avec contraintes visuelles
+- ✅ Styling cohérent avec Tailwind CSS v4.1.11
+- ✅ Indicateurs visuels pour les actions (création, modification, suppression)
+
+### 🛠️ Outils CLI
+
+#### Créer un client interactif
+```bash
+php bin/console app:client:create
+```
+
+#### Importer des produits depuis CSV
+```bash
+php bin/console app:product:import path/to/file.csv
+```
+
+Format CSV attendu :
+```
+name,description,price
+Produit 1,Description du produit,29.99
+Produit 2,Autre description,49.99
+```
+
+## Structure du projet
+
+```
+src/
+├── Controller/        # Contrôleurs (Users, Products, Clients, Security)
+├── Entity/           # Entités Doctrine (User, Product, Client)
+├── Form/            # Types de formulaire
+├── Repository/      # Repositories personnalisés
+├── Security/Voter/  # Voters pour le contrôle d'accès
+├── Command/         # Commandes CLI
+├── Service/         # Services métier (ProductCsvExporter)
+└── DataFixtures/    # Données de test
+templates/
+├── base.html.twig           # Layout principal
+├── user/                    # Templates utilisateurs
+├── product/                 # Templates produits
+├── client/                  # Templates clients
+└── security/                # Pages d'authentification
+```
+
+## Permissions par rôle
+
+| Fonctionnalité | ROLE_USER | ROLE_MANAGER | ROLE_ADMIN |
+|---|:---:|:---:|:---:|
+| Voir le dashboard | ✅ | ✅ | ✅ |
+| Voir les produits | ✅ | ✅ | ✅ |
+| Créer/modifier/suppimer produits | ❌ | ❌ | ✅ |
+| Exporter produits CSV | ❌ | ❌ | ✅ |
+| Voir les clients | ❌ | ✅ | ✅ |
+| Créer/modifier clients | ❌ | ✅ | ✅ |
+| Supprimer clients | ❌ | ❌ | ✅ |
+| Voir/créer utilisateurs | ❌ | ❌ | ✅ |
+| Modifier/supprimer utilisateurs | ❌ | ❌ | ✅ |
+
+## Technologies utilisées
+
+- **Framework** : Symfony 7.4
+- **Base de données** : MySQL/MariaDB avec Doctrine ORM
+- **Frontend** : Tailwind CSS v4.1.11
+- **JavaScript** : Stimulus pour l'interactivité
+- **Validation** : Symfony Validator avec contraintes personnalisées
+- **Sécurité** : Voters, hachage bcrypt, CSRF tokens
+
+## Documentation supplémentaire
+
+- [Symfony Documentation](https://symfony.com/doc/7.4/index.html)
+- [Doctrine ORM](https://www.doctrine-project.org/)
+- [Tailwind CSS](https://tailwindcss.com/)
